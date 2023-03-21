@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="under-construction">
+      <img
+        alt="Website is under construction"
+        data-testid="website-under-construction-image"
+        src={"./images/under-construction.jpg"}
+      />
+      <div>
+        <label>TODO List</label>
+        <ul>
+          <li>
+            Domain
+            <ul>
+              <li className="strike-through">Purchase domain</li>
+              <li>Transfer Domain</li>
+              <li>Initial Deployment</li>
+            </ul>
+          </li>
+          <li>
+            Infrastructure
+            <ul>
+              <li>Distribution</li>
+              <li>Route53 Entry</li>
+              <li>Etc</li>
+            </ul>
+          </li>
+          <li>
+            CICD
+            <ul>
+              <li>Deploy website</li>
+              <li>Deploy Infrastructure</li>
+            </ul>
+          </li>
+          <li>
+            Content
+            <ul>
+              <li className='strike-through'>Configure Node Sass</li>
+              <li>Settle on a color scheme</li>
+              <li>Routes</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
