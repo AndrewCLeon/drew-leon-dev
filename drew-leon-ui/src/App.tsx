@@ -18,8 +18,8 @@ function App() {
               Domain
               <ul>
                 <li className="strike-through">Purchase domain</li>
-                <li>Transfer Domain</li>
-                <li>Initial Deployment</li>
+                <li className="strike-through">Transfer Domain</li>
+                <li className="strike-through">Initial Deployment</li>
               </ul>
             </li>
             <li>
