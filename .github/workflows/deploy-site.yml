@@ -1,0 +1,45 @@
+name: Deploy site
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'drew-leon-ui/**'
+jobs:
+  environment:
+    name: prod
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: drew-leon-ui
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js 18
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '18.x'
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build app
+      run: npm run build
+
+    - name: Sync to S3
+      run: |
+        aws s3 sync build s3://${{ env.BUCKET_NAME }} \
+          --delete \
+          --exclude 'index.html' \
+          --cache-control 'max-age=31536000,public' \
+          --metadata '{"build": "'${{ github.run_number }}'"}'
+        aws s3 cp build/index.html s3://${{ env.BUCKET_NAME }} \
+          --cache-control 'no-cache, no-store, must-revalidate' \
+          --metadata '{"build": "'${{ github.run_number }}'"}'
+
+    - name: Invalidate cache
+      uses: aws-actions/amazon-cloudfront-invalidate-action@v1
+      with:
+        paths: '/*'
+        distribution-id: ${{ env.DISTRIBUTION_ID }}
