@@ -31,13 +31,14 @@ export class WebsiteDistribution extends cdk.Stack {
         origin: new origins.S3Origin(bucket)
       },
       certificate: sslCertificate,
-      domainNames: [zone.zoneName]
+      domainNames: [zone.zoneName],
+      defaultRootObject: 'index.html'
     })
 
     new CnameRecord(this, 'TheCnameRecord', {
       zone,
-      domainName,
-      recordName: distribution.distributionDomainName,
+      domainName: distribution.domainName,
+      recordName: `www.${domainName}`,
     })
   }
 }
