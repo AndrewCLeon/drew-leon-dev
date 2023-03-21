@@ -25,9 +25,11 @@ function App() {
             <li>
               Infrastructure
               <ul>
-                <li>Distribution</li>
-                <li>Route53 Entry</li>
-                <li>Etc</li>
+                <li className="strike-through">CDK Configuration</li>
+                <li className="strike-through">Bucket</li>
+                <li className="strike-through">SSL Certificate</li>
+                <li className="strike-through">Distribution</li>
+                <li className="strike-through">Route53 Entry</li>
               </ul>
             </li>
             <li>
