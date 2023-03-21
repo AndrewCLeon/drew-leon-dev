@@ -1,4 +1,7 @@
 name: Deploy site
+permissions:
+  contents: "read"
+  id-token: "write"
 on:
   push:
     branches:
@@ -16,17 +19,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
     - name: Setup Node.js 18
       uses: actions/setup-node@v2-beta
       with:
         node-version: '18.x'
     - name: Install dependencies
       run: npm ci
-
     - name: Build app
       run: npm run build
-
     - name: Sync to S3
       run: |
         aws s3 sync build s3://${{ env.BUCKET_NAME }} \
@@ -37,7 +37,6 @@ jobs:
         aws s3 cp build/index.html s3://${{ env.BUCKET_NAME }} \
           --cache-control 'no-cache, no-store, must-revalidate' \
           --metadata '{"build": "'${{ github.run_number }}'"}'
-
     - name: Invalidate cache
       uses: aws-actions/amazon-cloudfront-invalidate-action@v1
       with:
