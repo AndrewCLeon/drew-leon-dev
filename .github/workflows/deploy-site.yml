@@ -38,7 +38,5 @@ jobs:
           --cache-control 'no-cache, no-store, must-revalidate' \
           --metadata '{"build": "'${{ github.run_number }}'"}'
     - name: Invalidate cache
-      uses: aws-actions/amazon-cloudfront-invalidate-action@v1
-      with:
-        paths: '/*'
-        distribution-id: ${{ env.DISTRIBUTION_ID }}
+      run: |
+        aws cloudfront create-invalidation --distribution-id ${{ env.DISTRIBUTION_ID }} --paths '/*'
