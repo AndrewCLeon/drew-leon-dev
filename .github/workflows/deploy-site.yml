@@ -8,7 +8,7 @@ on:
       - master
 env:
   BUCKET_NAME: ${{ vars.BUCKET_NAME }}
-  DISTRIBUTION_ID: ${{ vars.BUCKET_NAME }}
+  DISTRIBUTION_ID: ${{ vars.DISTRIBUTION_ID }}
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
