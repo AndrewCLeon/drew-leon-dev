@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - master
+env:
+  BUCKET_NAME: ${{ vars.BUCKET_NAME }}
+  DISTRIBUTION_ID: ${{ vars.BUCKET_NAME }}
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
